@@ -64,8 +64,9 @@ for port in $OUT; do
    iptables -A OUTPUT -p udp --dport "$port" -m conntrack --ctstate NEW -j ACCEPT
 done
 
-# ICMP
-iptables -A INPUT -p icmp -j ACCEPT
+# Allow Horizontal
+iptables -A INPUT -s 172.20.240.0/24 -j ACCEPT
+iptables -A OUTPUT -s 172.20.240.0/24 -j ACCEPT
 
 # --------------------------------------------------
 # Optional logging (rate limited)
