@@ -52,8 +52,9 @@ for port in $IN; do
    iptables -A INPUT -p udp --dport "$port" -m conntrack --ctstate NEW -j ACCEPT
 done
 
-printf "[+] Deny outbound ICMP\n"
+printf "[+] Deny outbound ICMP and Allow Inbound\n"
 iptables -A OUTPUT -p icmp -j DROP
+iptables -A INPUT -p icmp -j ACCEPT
 
 #OUTBOUND
 for port in $OUT; do
@@ -80,11 +81,6 @@ iptables -P FORWARD DROP
 # Drop invalid early
 iptables -A INPUT  -m conntrack --ctstate INVALID -j DROP
 iptables -A OUTPUT -m conntrack --ctstate INVALID -j DROP
-
-
-# Allow vertical
-iptables -A INPUT -s 192.168.111.0/24 -j ACCEPT
-iptables -A OUTPUT -s 192.168.111.0/24 -j ACCEPT
 
 #v6
 sysctl -w net.ipv6.conf.all.disable_ipv6=1
