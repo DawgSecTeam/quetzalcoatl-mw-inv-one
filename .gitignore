@@ -1,12 +1,9 @@
 minzero/deploy.log
-minzero/hostfile
 minzero/pass_*
 testing/.vagrant/
 testing/.env
-*.tar
 *.*.swp
 /*/*.*.swp
 minzero/resources.tar.gz
-systems/*
 !systems/README.md
 minzero/discordkey
